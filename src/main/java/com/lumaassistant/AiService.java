@@ -1,5 +1,6 @@
 package com.lumaassistant;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -12,6 +13,9 @@ import java.nio.file.Path;
 
 @Service
 public class AiService {
+
+    @Autowired
+    private CommandExecutor commandExecutor;
 
     private final String API_KEY = "SUA_API_KEY";
 
@@ -30,16 +34,16 @@ public class AiService {
         headers.setBearerAuth(API_KEY);
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        String body = """
+/*        String body = """
         {
           "model": "gpt-4o-mini",
           "messages": [
             {"role": "user", "content": "%s"}
           ]
         }
-        """.formatted(prompt.replace("\"", "\\\""));
+        """.formatted(prompt.replace("\"", "\\\""));*/
 
-        HttpEntity<String> request = new HttpEntity<>(body, headers);
+        HttpEntity<String> request = new HttpEntity<>("body", headers);
 
         ResponseEntity<String> response = rest.postForEntity(
                 "https://api.openai.com/v1/chat/completions",
@@ -48,5 +52,9 @@ public class AiService {
         );
 
         return response.getBody();
+    }
+
+    public String processarMock(String... userInput) throws Exception {
+       return commandExecutor.executar(userInput);
     }
 }

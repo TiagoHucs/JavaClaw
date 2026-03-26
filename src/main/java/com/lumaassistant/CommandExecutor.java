@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 @Service
 public class CommandExecutor {
 
-    private static final String DIRETORIO = "C:/workspace/seu-projeto";
+    private static final String DIRETORIO = "C:\\workspace\\LumaAssistant";
 
     public String executar(String jsonResposta) throws Exception {
 
@@ -31,4 +31,19 @@ public class CommandExecutor {
 
         return "Comando não reconhecido.";
     }
+
+    public String executar(String... command) throws Exception {
+
+        ProcessBuilder pb = new ProcessBuilder(command);
+        pb.directory(new File(DIRETORIO));
+
+        Process process = pb.start();
+
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(process.getInputStream())
+        );
+
+        return reader.lines().collect(Collectors.joining("\n"));
+    }
+
 }

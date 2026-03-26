@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LumaAssistant</title>
+</head>
+<body>
+    <h2>LumaAssistant Chat</h2>
+    <input type="text" id="msg" placeholder="Digite..." />
+    <button onclick="send()">Enviar</button>
+
+    <pre id="chat"></pre>
+
+    <script>
+        function send() {
+            let msg = document.getElementById("msg").value;
+
+            fetch("http://localhost:8080/chat", {
+                method: "POST",
+                headers: { "Content-Type": "text/plain" },
+                body: msg
+            })
+            .then(r => r.text())
+            .then(res => {
+                document.getElementById("chat").innerText += "\nVocê: " + msg + "\nIA: " + res + "\n";
+            });
+        }
+    </script>
+</body>
+</html>

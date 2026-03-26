@@ -14,6 +14,7 @@ public class ChatController {
     @PostMapping
     public String chat(@RequestBody String message) throws Exception {
         String[] command = message.split(" ");
-        return aiService.processarMock(command);
+        //return aiService.processarMock(command);
+        return aiService.processarChat(message);
     }
 }

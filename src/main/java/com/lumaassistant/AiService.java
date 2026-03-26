@@ -1,5 +1,6 @@
 package com.lumaassistant;
 
+import com.lumaassistant.openrouter.OpenRouterClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -16,6 +17,9 @@ public class AiService {
 
     @Autowired
     private CommandExecutor commandExecutor;
+
+    @Autowired
+    private OpenRouterClient openRouterClient;
 
     private final String API_KEY = "SUA_API_KEY";
 
@@ -52,6 +56,10 @@ public class AiService {
         );
 
         return response.getBody();
+    }
+
+    public String processarChat(String userInput) throws Exception {
+        return openRouterClient.chamada(userInput);
     }
 
     public String processarMock(String... userInput) throws Exception {

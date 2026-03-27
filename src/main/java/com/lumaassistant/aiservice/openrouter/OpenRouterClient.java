@@ -4,7 +4,7 @@ import com.lumaassistant.aiservice.openrouter.request.*;
 import com.lumaassistant.aiservice.openrouter.response.Response;
 import com.lumaassistant.config.Config;
 import com.lumaassistant.filereader.FileReader;
-import com.lumaassistant.tools.ToolsService;
+import com.lumaassistant.tools.ToolsFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -21,9 +21,6 @@ public class OpenRouterClient {
 
     @Autowired
     private Config config;
-
-    @Autowired
-    private ToolsService toolsService;
 
     public Response chamada(String texto) {
 
@@ -50,7 +47,7 @@ public class OpenRouterClient {
         messages.add(messageUsr);
 
         chatRequest.setMessages(messages);
-        chatRequest.setTools(toolsService.getTools());
+        chatRequest.setTools(ToolsFactory.getTools());
 
         // configs
         //chatRequest.setToolChoice("auto");

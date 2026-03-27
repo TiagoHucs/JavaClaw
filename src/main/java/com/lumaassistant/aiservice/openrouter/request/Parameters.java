@@ -6,7 +6,7 @@ import java.util.Map;
 public class Parameters {
 
     private String type = "object";
-    private Map<String, Property> properties;
+    private Map<String, Object> properties;
     private List<String> required;
 
     public String getType() {
@@ -17,11 +17,11 @@ public class Parameters {
         this.type = type;
     }
 
-    public Map<String, Property> getProperties() {
+    public Map<String, Object> getProperties() {
         return properties;
     }
 
-    public void setProperties(Map<String, Property> properties) {
+    public void setProperties(Map<String, Object> properties) {
         this.properties = properties;
     }
 

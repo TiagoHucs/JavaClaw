@@ -1,6 +1,9 @@
 package com.lumaassistant.aiservice.openrouter.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Message {
@@ -9,37 +12,20 @@ public class Message {
     private Object refusal;
     private Object reasoning;
 
+    @JsonProperty("tool_calls")
+    private List<ToolCall> toolCalls;
+
     public String getRole() {
         return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public String getContent() {
         return content;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public List<ToolCall> getToolCalls(){
+        return toolCalls;
     }
 
-    public Object getRefusal() {
-        return refusal;
-    }
 
-    public void setRefusal(Object refusal) {
-        this.refusal = refusal;
-    }
-
-    public Object getReasoning() {
-        return reasoning;
-    }
-
-    public void setReasoning(Object reasoning) {
-        this.reasoning = reasoning;
-    }
-
-    // getters e setters
 }

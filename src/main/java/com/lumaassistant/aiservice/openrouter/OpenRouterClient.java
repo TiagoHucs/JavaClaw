@@ -4,6 +4,7 @@ import com.lumaassistant.aiservice.openrouter.request.*;
 import com.lumaassistant.aiservice.openrouter.response.Response;
 import com.lumaassistant.config.Config;
 import com.lumaassistant.filereader.FileReader;
+import com.lumaassistant.tools.ToolsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,10 @@ public class OpenRouterClient {
     @Autowired
     private Config config;
 
-    public String chamada(String texto) {
+    @Autowired
+    private ToolsService toolsService;
+
+    public Response chamada(String texto) {
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -46,33 +50,11 @@ public class OpenRouterClient {
         messages.add(messageUsr);
 
         chatRequest.setMessages(messages);
-
-        // tool (terminal)
-/*
-        Property commandProp = new Property();
-        commandProp.setType("string");
-        commandProp.setDescription("Comando a ser executado");
-
-        Parameters params = new Parameters();
-        params.setProperties(Map.of("command", commandProp));
-        params.setRequired(List.of("command"));
-
-        FunctionDefinition function = new FunctionDefinition();
-        function.setName("run_terminal");
-        function.setDescription("Executa comandos no terminal");
-        function.setParameters(params);
-
-        Tool tool = new Tool();
-        tool.setType("function");
-        tool.setFunction(function);
-
-        chatRequest.setTools(List.of(tool));
-
+        chatRequest.setTools(toolsService.getTools());
 
         // configs
-        chatRequest.setToolChoice("auto");
-        chatRequest.setTemperature(0.3);
-*/
+        //chatRequest.setToolChoice("auto");
+        //chatRequest.setTemperature(0.3);
 
         // Request
         HttpEntity<ChatRequest> request = new HttpEntity<>(chatRequest, headers);
@@ -84,6 +66,6 @@ public class OpenRouterClient {
         );
 
         // Resultado
-        return response.getChoices().get(0).getMessage().getContent();
+        return response;
     }
 }

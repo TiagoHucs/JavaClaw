@@ -9,5 +9,4 @@ public class PromptTokensDetails {
     private int audio_tokens;
     private int video_tokens;
 
-    // getters e setters
 }

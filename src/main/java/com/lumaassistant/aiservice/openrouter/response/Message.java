@@ -19,13 +19,39 @@ public class Message {
         return role;
     }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public String getContent() {
         return content;
     }
 
-    public List<ToolCall> getToolCalls(){
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Object getRefusal() {
+        return refusal;
+    }
+
+    public void setRefusal(Object refusal) {
+        this.refusal = refusal;
+    }
+
+    public Object getReasoning() {
+        return reasoning;
+    }
+
+    public void setReasoning(Object reasoning) {
+        this.reasoning = reasoning;
+    }
+
+    public List<ToolCall> getToolCalls() {
         return toolCalls;
     }
 
-
+    public void setToolCalls(List<ToolCall> toolCalls) {
+        this.toolCalls = toolCalls;
+    }
 }

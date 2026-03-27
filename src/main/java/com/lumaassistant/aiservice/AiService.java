@@ -29,6 +29,11 @@ public class AiService {
             for (ToolCall tc : message.getToolCalls()) {
                 System.out.println("Nome: " + tc.getFunction().getName());
                 System.out.println("Args: " + tc.getFunction().getArguments());
+                //TODO: somente teste
+                if("create_folder".equals(tc.getFunction().getName())){
+                    //windows
+                    commandExecutor.executar("cmd", "/c", "mkdir", tc.getFunction().getArgument("folderName"));
+                }
             }
         } else {
             System.out.println("❌ Nenhuma tool chamada");

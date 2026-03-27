@@ -1,10 +1,14 @@
 package com.lumaassistant.aiservice.openrouter;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lumaassistant.aiservice.openrouter.request.*;
 import com.lumaassistant.aiservice.openrouter.response.Response;
 import com.lumaassistant.config.Config;
 import com.lumaassistant.filereader.FileReader;
 import com.lumaassistant.tools.ToolsFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -14,6 +18,7 @@ import java.util.*;
 
 @Service
 public class OpenRouterClient {
+    private static final Logger log = LoggerFactory.getLogger(OpenRouterClient.class);
 
     private final String USER = "user";
     private final String SYSTEM = "system";
@@ -22,7 +27,7 @@ public class OpenRouterClient {
     @Autowired
     private Config config;
 
-    public Response chamada(String texto) {
+    public Response chamada(String texto) throws JsonProcessingException {
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -53,7 +58,11 @@ public class OpenRouterClient {
         //chatRequest.setToolChoice("auto");
         //chatRequest.setTemperature(0.3);
 
+
+        ObjectMapper mapper = new ObjectMapper();
         // Request
+        log.info("REQUEST: {}", mapper.writeValueAsString(chatRequest));
+
         HttpEntity<ChatRequest> request = new HttpEntity<>(chatRequest, headers);
         // Call
         Response response = restTemplate.postForObject(
@@ -61,6 +70,8 @@ public class OpenRouterClient {
                 request,
                 Response.class
         );
+
+        log.info("ESPONSE: {}", mapper.writeValueAsString(response));
 
         // Resultado
         return response;

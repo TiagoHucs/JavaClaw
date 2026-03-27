@@ -1,5 +1,6 @@
-package com.lumaassistant;
+package com.lumaassistant.controller;
 
+import com.lumaassistant.aiservice.AiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,6 @@ public class ChatController {
     @PostMapping
     public String chat(@RequestBody String message) throws Exception {
         String[] command = message.split(" ");
-        //return aiService.processarMock(command);
         return aiService.processarChat(message);
     }
 }

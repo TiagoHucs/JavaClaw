@@ -1,4 +1,4 @@
-package com.lumaassistant;
+package com.lumaassistant.command;
 
 import org.springframework.stereotype.Service;
 

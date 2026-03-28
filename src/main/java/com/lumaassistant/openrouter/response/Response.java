@@ -1,4 +1,4 @@
-package com.lumaassistant.aiservice.openrouter.response;
+package com.lumaassistant.openrouter.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.List;
@@ -78,4 +78,13 @@ public class Response {
     public void setUsage(Usage usage) {
         this.usage = usage;
     }
+
+    public boolean haveToolCalls(){
+        return getChoices().get(0).getMessage().getToolCalls() != null;
+    }
+
+    public List<ToolCall> getToolCalls(){
+        return getChoices().get(0).getMessage().getToolCalls();
+    }
+
 }

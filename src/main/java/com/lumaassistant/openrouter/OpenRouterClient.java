@@ -1,12 +1,13 @@
-package com.lumaassistant.aiservice.openrouter;
+package com.lumaassistant.openrouter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lumaassistant.aiservice.openrouter.request.*;
-import com.lumaassistant.aiservice.openrouter.response.Response;
+import com.lumaassistant.openrouter.request.RequestMessage;
+import com.lumaassistant.openrouter.response.Response;
 import com.lumaassistant.config.Config;
 import com.lumaassistant.filereader.FileReader;
-import com.lumaassistant.tools.ToolsFactory;
+import com.lumaassistant.openrouter.request.ChatRequest;
+import com.lumaassistant.tools.ToolDefinitionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,10 @@ public class OpenRouterClient {
     @Autowired
     private Config config;
 
-    public Response chamada(String texto) throws JsonProcessingException {
+    @Autowired
+    private ToolDefinitionFactory toolDefinitionFactory;
+
+    public Response chamada(List<RequestMessage> contexto) throws JsonProcessingException {
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -39,20 +43,58 @@ public class OpenRouterClient {
         //Request
         ChatRequest chatRequest = new ChatRequest();
 
-        List<Message> messages = new ArrayList<>();
+        chatRequest.setMessages(contexto);
+        chatRequest.setTools(toolDefinitionFactory.getToolDefinitions());
 
-        Message messageSys = new Message();
+        // configs
+        //chatRequest.setToolChoice("auto");
+        //chatRequest.setTemperature(0.3);
+
+
+        ObjectMapper mapper = new ObjectMapper();
+        // Request
+        log.info("REQUEST: {}", mapper.writeValueAsString(chatRequest));
+
+        HttpEntity<ChatRequest> request = new HttpEntity<>(chatRequest, headers);
+        // Call
+        Response response = restTemplate.postForObject(
+                URL,
+                request,
+                Response.class
+        );
+
+        log.info("RESPONSE: {}", mapper.writeValueAsString(response));
+
+        // Resultado
+        return response;
+    }
+
+    public Response devolucao(String texto) throws JsonProcessingException {
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        // Headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(config.getVar("TOKEN"));
+
+        //Request
+        ChatRequest chatRequest = new ChatRequest();
+
+        List<RequestMessage> messages = new ArrayList<>();
+
+        RequestMessage messageSys = new RequestMessage();
         messageSys.setRole(SYSTEM);
         messageSys.setContent(FileReader.readFile("IDENTITY.md"));
         messages.add(messageSys);
 
-        Message messageUsr = new Message();
+        RequestMessage messageUsr = new RequestMessage();
         messageUsr.setRole(USER);
         messageUsr.setContent(texto);
         messages.add(messageUsr);
 
         chatRequest.setMessages(messages);
-        chatRequest.setTools(ToolsFactory.getTools());
+        chatRequest.setTools(toolDefinitionFactory.getToolDefinitions());
 
         // configs
         //chatRequest.setToolChoice("auto");

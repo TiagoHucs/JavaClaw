@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 @Service
 public class CommandExecutor {
 
-    private static final String DIRETORIO = ".";
+    private static final String DIRETORIO = "./target";
 
     public String executar(String... command) throws Exception {
 

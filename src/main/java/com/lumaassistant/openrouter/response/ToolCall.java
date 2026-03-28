@@ -1,4 +1,4 @@
-package com.lumaassistant.aiservice.openrouter.response;
+package com.lumaassistant.openrouter.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -31,5 +31,10 @@ public class ToolCall {
 
     public void setFunction(FunctionCall function) {
         this.function = function;
+    }
+
+    @Override
+    public String toString(){
+        return "tool_call: " + function.getName() + " " + function.getArguments();
     }
 }

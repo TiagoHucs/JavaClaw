@@ -1,4 +1,4 @@
-package com.lumaassistant.aiservice.openrouter.response;
+package com.lumaassistant.openrouter.response;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;

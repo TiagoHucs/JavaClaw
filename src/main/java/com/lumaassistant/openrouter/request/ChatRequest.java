@@ -1,15 +1,16 @@
-package com.lumaassistant.aiservice.openrouter.request;
+package com.lumaassistant.openrouter.request;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.lumaassistant.tools.ToolDefinition;
 
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ChatRequest {
     private String model = "openrouter/free";
-    private List<Message> messages;
-    private List<Tool> tools;
+    private List<RequestMessage> messages;
+    private List<ToolDefinition> tools;
 
     @JsonProperty("tool_choice")
     private String toolChoice;
@@ -29,19 +30,19 @@ public class ChatRequest {
         this.model = model;
     }
 
-    public List<Message> getMessages() {
+    public List<RequestMessage> getMessages() {
         return messages;
     }
 
-    public void setMessages(List<Message> messages) {
+    public void setMessages(List<RequestMessage> messages) {
         this.messages = messages;
     }
 
-    public List<Tool> getTools() {
+    public List<ToolDefinition> getTools() {
         return tools;
     }
 
-    public void setTools(List<Tool> tools) {
+    public void setTools(List<ToolDefinition> tools) {
         this.tools = tools;
     }
 

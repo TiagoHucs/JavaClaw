@@ -1,4 +1,4 @@
-package com.lumaassistant.aiservice.openrouter.request;
+package com.lumaassistant.openrouter.request;
 
 public class Property {
 

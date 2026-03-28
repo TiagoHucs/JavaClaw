@@ -1,6 +1,6 @@
 package com.lumaassistant.controller;
 
-import com.lumaassistant.aiservice.AiService;
+import com.lumaassistant.services.LumaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.*;
 public class ChatController {
 
     @Autowired
-    private AiService aiService;
+    private LumaService lumaService;
 
     @PostMapping
     public String chat(@RequestBody String message) throws Exception {
-        String[] command = message.split(" ");
-        return aiService.processarChat(message);
+        return lumaService.processarChat(message);
+
     }
+
 }

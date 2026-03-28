@@ -1,13 +1,13 @@
-package com.lumaassistant.aiservice.openrouter.request;
+package com.lumaassistant.openrouter.request;
 
-public class Message {
+public class RequestMessage {
 
     private String role;    // system, user, assistant
     private String content;
 
-    public Message() {}
+    public RequestMessage() {}
 
-    public Message(String role, String content) {
+    public RequestMessage(String role, String content) {
         this.role = role;
         this.content = content;
     }

@@ -1,8 +1,8 @@
 package com.lumaassistant.tools;
 
-import com.lumaassistant.aiservice.openrouter.request.FunctionDefinition;
-import com.lumaassistant.aiservice.openrouter.request.Parameters;
-import com.lumaassistant.aiservice.openrouter.request.Tool;
+import com.lumaassistant.openrouter.request.FunctionDefinition;
+import com.lumaassistant.openrouter.request.Parameters;
+import com.lumaassistant.openrouter.request.Tool;
 
 import java.util.Arrays;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package com.lumaassistant.aiservice.openrouter.response;
+package com.lumaassistant.openrouter.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

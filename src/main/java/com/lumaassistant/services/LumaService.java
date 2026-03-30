@@ -47,7 +47,7 @@ public class LumaService {
                         tc.getFunction().getArguments()
                 );
                 log.info("tool {} response: {} "+ tc.getFunction().getName() + result );
-                contexto.add(new RequestMessage("system",result));
+                contexto.add(new RequestMessage("tool",result));
 
                 response = openRouterClient.chamada(contexto);
             }

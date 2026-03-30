@@ -4,6 +4,37 @@
     <meta charset="UTF-8">
     <title>LumaAssistant</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Loading overlay styles */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.35);
+            display: none; /* hidden by default */
+            align-items: center;
+            justify-content: center;
+            z-index: 9999; /* on top */
+            pointer-events: auto; /* capture events to block underlying UI */
+        }
+        .loading-overlay.active {
+            display: flex;
+        }
+        .spinner {
+            width: 64px;
+            height: 64px;
+            border: 8px solid rgba(255, 255, 255, 0.2);
+            border-top-color: #ffffff;
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
 
@@ -14,26 +45,57 @@
 
     <div class="input-area">
         <input type="text" id="msg" placeholder="Digite sua mensagem..." />
-        <button onclick="send()">Enviar</button>
+        <button id="sendBtn" onclick="send()">Enviar</button>
     </div>
+</div>
+
+<!-- Loading overlay (bloqueia interação enquanto ativo) -->
+<div id="loadingOverlay" class="loading-overlay" aria-hidden="true" aria-live="polite">
+    <div class="spinner" role="status" aria-label="Carregando"></div>
 </div>
 
 <script>
     const input = document.getElementById("msg");
+    const sendBtn = document.getElementById("sendBtn");
+    const overlay = document.getElementById("loadingOverlay");
+    let isLoading = false;
 
     // ENTER envia mensagem
     input.addEventListener("keypress", function(e) {
         if (e.key === "Enter") {
-            send();
+            // evita enviar quando estiver carregando
+            if (!isLoading) send();
         }
     });
+
+    function showLoading() {
+        isLoading = true;
+        overlay.classList.add('active');
+        overlay.setAttribute('aria-hidden', 'false');
+        input.disabled = true;
+        sendBtn.disabled = true;
+    }
+
+    function hideLoading() {
+        isLoading = false;
+        overlay.classList.remove('active');
+        overlay.setAttribute('aria-hidden', 'true');
+        input.disabled = false;
+        sendBtn.disabled = false;
+        input.focus();
+    }
 
     function send() {
         let msg = input.value.trim();
         if (!msg) return;
 
+        // evita múltiplas requisições
+        if (isLoading) return;
+
         addMessage("Você", msg);
         input.value = "";
+
+        showLoading();
 
         fetch("http://localhost:8080/chat", {
             method: "POST",
@@ -43,6 +105,13 @@
         .then(r => r.text())
         .then(res => {
             addMessage("IA", res);
+        })
+        .catch(err => {
+            console.error('Erro na requisição:', err);
+            addMessage('Sistema', 'Ocorreu um erro ao contatar o servidor.');
+        })
+        .finally(() => {
+            hideLoading();
         });
     }
 

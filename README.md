@@ -33,6 +33,7 @@ Luma follows a structured interaction flow with an AI API:
 
 ## 📦 Project Structure
 
+```
 luma-assistant/
  ├── tools/
  │   ├── createfile/
@@ -47,6 +48,7 @@ luma-assistant/
  ├── service/
  ├── controller/
  └── ...
+```
 
 ---
 

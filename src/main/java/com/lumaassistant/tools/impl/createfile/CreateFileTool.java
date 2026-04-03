@@ -2,7 +2,7 @@ package com.lumaassistant.tools.impl.createfile;
 
 import com.lumaassistant.config.Config;
 import com.lumaassistant.tools.AbstractTool;
-import com.lumaassistant.util.JsonMapperHelper;
+import com.lumaassistant.util.LumaUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -41,7 +41,7 @@ public class CreateFileTool extends AbstractTool {
     @Override
     public String execute(String inputJson) throws Exception {
 
-        CreateFileRequest request = JsonMapperHelper.map(inputJson, CreateFileRequest.class);
+        CreateFileRequest request = LumaUtils.map(inputJson, CreateFileRequest.class);
 
         Path basePath = Paths.get(config.getVar("LUMA_WORKSPACE")).toAbsolutePath();
         Path caminho = basePath.resolve(request.getPath()).normalize();

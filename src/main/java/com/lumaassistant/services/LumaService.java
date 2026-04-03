@@ -1,12 +1,12 @@
 package com.lumaassistant.services;
 
-import com.lumaassistant.filereader.FileReader;
-import com.lumaassistant.openrouter.OpenRouterClient;
+import com.lumaassistant.command.CommandExecutor;
+import com.lumaassistant.openrouter.IOpenRouterClient;
 import com.lumaassistant.openrouter.request.RequestMessage;
 import com.lumaassistant.openrouter.response.Response;
 import com.lumaassistant.openrouter.response.ToolCall;
-import com.lumaassistant.command.CommandExecutor;
 import com.lumaassistant.tools.ToolExecutor;
+import com.lumaassistant.util.LumaUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class LumaService {
     private CommandExecutor commandExecutor;
 
     @Autowired
-    private OpenRouterClient openRouterClient;
+    private IOpenRouterClient modelClient;
 
     @Autowired
     private ToolExecutor toolExecutor;
@@ -31,10 +31,10 @@ public class LumaService {
     public String processarChat(String userInput) throws Exception {
 
         List<RequestMessage> contexto = new ArrayList<>();
-        contexto.add(new RequestMessage("system",FileReader.readFile("IDENTITY.md")));
+        contexto.add(new RequestMessage("system", LumaUtils.readFile("IDENTITY.md")));
         contexto.add(new RequestMessage("user",userInput));
 
-        Response response = openRouterClient.chamada(contexto);
+        Response response = modelClient.call(contexto);
 
         while (response.haveToolCalls()) {
 
@@ -49,7 +49,7 @@ public class LumaService {
                 log.info("tool {} response: {} "+ tc.getFunction().getName() + result );
                 contexto.add(new RequestMessage("tool",result));
 
-                response = openRouterClient.chamada(contexto);
+                response = modelClient.call(contexto);
             }
         }
 

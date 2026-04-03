@@ -1,6 +1,6 @@
 This tool is used to send comands to the voyager spacecraft, and to receive data from it.
 
-this tool receive two fields:
+this tool receive one field:
 
 - command: the command to send to the voyager spacecraft
 

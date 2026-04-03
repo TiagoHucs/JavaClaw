@@ -59,7 +59,7 @@ public class OpenRouterClient implements IOpenRouterClient {
                 Response.class
         );
 
-        log.info("RESPONSE: {}", LumaUtils.stringlify(chatRequest));
+        log.info("RESPONSE: {}", LumaUtils.stringlify(response));
 
         // Resultado
         return response;

@@ -23,7 +23,7 @@ public class CommandVoyagerTool extends AbstractTool {
 
     @Override
     public String getDescription() {
-        return LumaUtils.readFile("tools/voyager/voyager-tool-schema.json");
+        return LumaUtils.readFile("tools/voyager/DESCRIPTION.md");
     }
 
     @Override

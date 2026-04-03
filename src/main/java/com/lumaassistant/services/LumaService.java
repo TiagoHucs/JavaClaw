@@ -5,6 +5,8 @@ import com.lumaassistant.openrouter.IOpenRouterClient;
 import com.lumaassistant.openrouter.request.RequestMessage;
 import com.lumaassistant.openrouter.response.Response;
 import com.lumaassistant.openrouter.response.ToolCall;
+import com.lumaassistant.tools.ToolDefinition;
+import com.lumaassistant.tools.ToolDefinitionFactory;
 import com.lumaassistant.tools.ToolExecutor;
 import com.lumaassistant.util.LumaUtils;
 import org.slf4j.Logger;
@@ -18,6 +20,9 @@ import java.util.List;
 @Service
 public class LumaService {
     private static final Logger log = LoggerFactory.getLogger(LumaService.class);
+
+    @Autowired
+    private ToolDefinitionFactory toolDefinitionFactory;
 
     @Autowired
     private CommandExecutor commandExecutor;
@@ -34,7 +39,9 @@ public class LumaService {
         contexto.add(new RequestMessage("system", LumaUtils.readFile("IDENTITY.md")));
         contexto.add(new RequestMessage("user",userInput));
 
-        Response response = modelClient.call(contexto);
+        List<ToolDefinition> toolDefinitions = toolDefinitionFactory.getToolDefinitions();
+
+        Response response = modelClient.call(contexto,toolDefinitions);
 
         while (response.haveToolCalls()) {
 
@@ -49,7 +56,7 @@ public class LumaService {
                 log.info("tool {} response: {} "+ tc.getFunction().getName() + result );
                 contexto.add(new RequestMessage("tool",result));
 
-                response = modelClient.call(contexto);
+                response = modelClient.call(contexto,toolDefinitions);
             }
         }
 

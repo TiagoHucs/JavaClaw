@@ -4,11 +4,14 @@ import com.lumaassistant.openrouter.request.RequestMessage;
 import com.lumaassistant.openrouter.response.Choice;
 import com.lumaassistant.openrouter.response.Message;
 import com.lumaassistant.openrouter.response.Response;
+import com.lumaassistant.openrouter.response.ToolCall;
+import com.lumaassistant.tools.ToolDefinition;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -21,7 +24,7 @@ import java.util.List;
 public class FakeOpenRouterClient implements IOpenRouterClient {
 
     @Override
-    public Response call(List<RequestMessage> contexto) {
+    public Response call(List<RequestMessage> contexto, List<ToolDefinition> tools) {
         Response r = new Response();
         r.setId("fake-1");
         r.setModel("fake-model");
@@ -37,6 +40,7 @@ public class FakeOpenRouterClient implements IOpenRouterClient {
             content = "(fake response) no input";
         }
         msg.setContent(content);
+        //msg.setToolCalls(Arrays.asList(new ToolCall())); // No tool calls in this fake response
 
         Choice choice = new Choice();
         choice.setIndex(0);

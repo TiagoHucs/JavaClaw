@@ -1,12 +1,10 @@
 package com.lumaassistant.openrouter;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lumaassistant.config.Config;
 import com.lumaassistant.openrouter.request.ChatRequest;
 import com.lumaassistant.openrouter.request.RequestMessage;
 import com.lumaassistant.openrouter.response.Response;
-import com.lumaassistant.tools.ToolDefinitionFactory;
+import com.lumaassistant.tools.ToolDefinition;
 import com.lumaassistant.util.LumaUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +15,6 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,10 +28,8 @@ public class OpenRouterClient implements IOpenRouterClient {
     @Autowired
     private Config config;
 
-    @Autowired
-    private ToolDefinitionFactory toolDefinitionFactory;
 
-    public Response call(List<RequestMessage> contexto) {
+    public Response call(List<RequestMessage> contexto, List<ToolDefinition> toolDefinitions) {
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -48,7 +43,7 @@ public class OpenRouterClient implements IOpenRouterClient {
 
         chatRequest.setModel("openrouter/free");
         chatRequest.setMessages(contexto);
-        chatRequest.setTools(toolDefinitionFactory.getToolDefinitions());
+        chatRequest.setTools(toolDefinitions);
 
         // configs
         //chatRequest.setToolChoice("auto");
@@ -70,53 +65,4 @@ public class OpenRouterClient implements IOpenRouterClient {
         return response;
     }
 
-    public Response devolucao(String texto) throws JsonProcessingException {
-
-        RestTemplate restTemplate = new RestTemplate();
-
-        // Headers
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.setBearerAuth(config.getVar("TOKEN"));
-
-        //Request
-        ChatRequest chatRequest = new ChatRequest();
-
-        List<RequestMessage> messages = new ArrayList<>();
-
-        RequestMessage messageSys = new RequestMessage();
-        messageSys.setRole(SYSTEM);
-        messageSys.setContent(LumaUtils.readFile("IDENTITY.md"));
-        messages.add(messageSys);
-
-        RequestMessage messageUsr = new RequestMessage();
-        messageUsr.setRole(USER);
-        messageUsr.setContent(texto);
-        messages.add(messageUsr);
-
-        chatRequest.setMessages(messages);
-        chatRequest.setTools(toolDefinitionFactory.getToolDefinitions());
-
-        // configs
-        //chatRequest.setToolChoice("auto");
-        //chatRequest.setTemperature(0.3);
-
-
-        ObjectMapper mapper = new ObjectMapper();
-        // Request
-        log.info("REQUEST: {}", mapper.writeValueAsString(chatRequest));
-
-        HttpEntity<ChatRequest> request = new HttpEntity<>(chatRequest, headers);
-        // Call
-        Response response = restTemplate.postForObject(
-                URL,
-                request,
-                Response.class
-        );
-
-        log.info("ESPONSE: {}", mapper.writeValueAsString(response));
-
-        // Resultado
-        return response;
-    }
 }

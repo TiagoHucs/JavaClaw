@@ -1,7 +1,6 @@
 # 🚀 LumaAssistant
 
-**LumaAssistant** is an intelligent assistant capable of executing real actions on the local environment, going beyond simple text responses. It combines AI models with a tool-based system to automate tasks such as file and folder creation.
-
+**LumaAssistant** is basic but poweful intelligent assistant capable of executing tools.
 ---
 
 ## 🧠 How it works
@@ -23,8 +22,7 @@ Luma follows a structured interaction flow with an AI API:
 
 ## 🛠️ Current Features
 
-- 📁 Directory creation (`CreateFolderTool`)
-- 📄 File creation (`CreateFileTool`)
+- 📁 Example tool (`CommandVoyagerTool`)
 - 🔄 Integration with AI APIs (e.g., OpenRouter/OpenAI)
 - 💬 Chat interface (in progress)
 - 🧠 Dynamic tool execution
@@ -36,8 +34,8 @@ Luma follows a structured interaction flow with an AI API:
 ```
 luma-assistant/
  ├── tools/
- │   ├── createfile/
- │   │   ├── CreateFileTool.java
+ │   ├── voyager/
+ │   │   ├── CommandVoyagerTool.java
  │   │   ├── schema.json
  │   │   ├── DESCRIPTION.md
  │   ├── createfolder/
@@ -55,7 +53,7 @@ luma-assistant/
 ## ⚙️ Requirements
 
 - Java 17+
-- Maven or Gradle
+- Maven
 - AI API account (e.g., OpenRouter)
 
 ---
@@ -73,7 +71,6 @@ cd luma-assistant
 
 Set these variables:
 
-LUMA_WORKSPACE=/path/to/workspace
 OPENROUTER_API_KEY=your_api_key
 
 ---
@@ -93,22 +90,13 @@ Or run via your IDE (IntelliJ, Eclipse, etc.)
 Example request:
 
 {
-  "message": "Create a folder called (names) with 2 files: women.txt and men.txt, each containing 3 names"
+"message": "Turn on Voyager instruments"
 }
-
----
-
-## 🔐 Security
-
-- Restricts operations to `LUMA_WORKSPACE`
-- Prevents path traversal (e.g., `../../`)
-- Validates inputs before execution
 
 ---
 
 ## 🚀 Roadmap
 
-- [ ] Multi-file creation support
 - [ ] Full web interface
 - [ ] Persistent memory system
 - [ ] External plugins (dynamic tools)
@@ -125,15 +113,12 @@ Contributions are welcome!
 3. Commit your changes
 4. Open a Pull Request
 
-
 ---
 
 ## 💡 Vision
 
 LumaAssistant aims to evolve into a fully autonomous agent capable of:
 
-- Creating complete projects
-- Automating development workflows
 - Integrating with multiple tools
 
 ---

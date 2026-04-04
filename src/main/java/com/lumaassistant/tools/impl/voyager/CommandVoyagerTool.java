@@ -1,19 +1,15 @@
 package com.lumaassistant.tools.impl.voyager;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lumaassistant.config.Config;
 import com.lumaassistant.tools.AbstractTool;
 import com.lumaassistant.util.LumaUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 @Component
 public class CommandVoyagerTool extends AbstractTool {
+    private static final Logger log = LoggerFactory.getLogger(CommandVoyagerTool.class);
 
     private final Config config;
 
@@ -41,8 +37,10 @@ public class CommandVoyagerTool extends AbstractTool {
         if(command == null || command.isEmpty()) {
             return "Field: command,  cannot be null or empty";
         } if (command.equals("turn_on") || command.equals("turn_off")) {
+            log.info("Voyager command acept: " + command);
             return "Command acept!";
         }  else {
+            log.error("Voyager command not recognized: " + command);
             return "Command not recognized!";
         }
     }

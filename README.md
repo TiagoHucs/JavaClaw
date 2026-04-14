@@ -3,6 +3,15 @@
 **LumaAssistant** is basic but poweful intelligent assistant capable of executing tools.
 ---
 
+
+<p align="center">
+    <picture>
+        <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/TiagoHucs/LumaAssistant/refs/heads/main/assets/javaclawlogo.png">
+        <img src="https://raw.githubusercontent.com/TiagoHucs/LumaAssistant/refs/heads/main/assets/javaclawlogo.png" alt="JavaClaw" width="500">
+
+</picture>
+</p>
+
 ## 🧠 How it works
 
 Luma follows a structured interaction flow with an AI API:
@@ -38,8 +47,8 @@ luma-assistant/
  │   │   ├── CommandVoyagerTool.java
  │   │   ├── schema.json
  │   │   ├── DESCRIPTION.md
- │   ├── createfolder/
- │   │   ├── CreateFolderTool.java
+ │   ├── another/
+ │   │   ├── AnotherTool.java
  │   │   ├── schema.json
  │   │   ├── DESCRIPTION.md
  ├── config/

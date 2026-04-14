@@ -1,13 +1,13 @@
-# 🚀 LumaAssistant
+# 🚀 JavaClaw
 
-**LumaAssistant** is basic but poweful intelligent assistant capable of executing tools.
+**JavaClaw** is basic but poweful intelligent assistant capable of executing tools.
 ---
 
 
 <p align="center">
     <picture>
-        <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/TiagoHucs/LumaAssistant/refs/heads/main/assets/javaclawlogo.png">
-        <img src="https://raw.githubusercontent.com/TiagoHucs/LumaAssistant/refs/heads/main/assets/javaclawlogo.png" alt="JavaClaw" width="500">
+        <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/TiagoHucs/JavaClaw/refs/heads/main/assets/javaclawlogo.png">
+        <img src="https://raw.githubusercontent.com/TiagoHucs/JavaClaw/refs/heads/main/assets/javaclawlogo.png" alt="JavaClaw" width="500">
 
 </picture>
 </p>
@@ -41,7 +41,7 @@ Luma follows a structured interaction flow with an AI API:
 ## 📦 Project Structure
 
 ```
-luma-assistant/
+java-claw/
  ├── tools/
  │   ├── voyager/
  │   │   ├── CommandVoyagerTool.java
@@ -53,7 +53,6 @@ luma-assistant/
  │   │   ├── DESCRIPTION.md
  ├── config/
  ├── service/
- ├── controller/
  └── ...
 ```
 
@@ -71,8 +70,8 @@ luma-assistant/
 
 ### 1. Clone the repository
 
-git clone https://github.com/your-user/luma-assistant.git
-cd luma-assistant
+git clone https://github.com/your-user/java-claw.git
+cd java-claw
 
 ---
 
@@ -126,7 +125,7 @@ Contributions are welcome!
 
 ## 💡 Vision
 
-LumaAssistant aims to evolve into a fully autonomous agent capable of:
+JavaClaw aims to evolve into a fully autonomous agent capable of:
 
 - Integrating with multiple tools
 

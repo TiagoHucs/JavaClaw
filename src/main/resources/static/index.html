@@ -2,44 +2,16 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>LumaAssistant</title>
+    <title>JavaClaw</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Loading overlay styles */
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.35);
-            display: none; /* hidden by default */
-            align-items: center;
-            justify-content: center;
-            z-index: 9999; /* on top */
-            pointer-events: auto; /* capture events to block underlying UI */
-        }
-        .loading-overlay.active {
-            display: flex;
-        }
-        .spinner {
-            width: 64px;
-            height: 64px;
-            border: 8px solid rgba(255, 255, 255, 0.2);
-            border-top-color: #ffffff;
-            border-radius: 50%;
-            animation: spin 0.9s linear infinite;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+
     </style>
 </head>
 <body>
 
 <div class="chat-container">
-    <h2>LumaAssistant</h2>
+    <h2>JavaClaw</h2>
 
     <div id="chat" class="chat-box"></div>
 

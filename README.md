@@ -31,7 +31,7 @@ Luma follows a structured interaction flow with an AI API:
 
 ## 🛠️ Current Features
 
-- 📁 Example tool (`CommandVoyagerTool`)
+- 📁 Example tool (`HelloTool`)
 - 🔄 Integration with AI APIs (e.g., OpenRouter/OpenAI)
 - 💬 Chat interface (in progress)
 - 🧠 Dynamic tool execution
@@ -43,13 +43,13 @@ Luma follows a structured interaction flow with an AI API:
 ```
 java-claw/
  ├── tools/
- │   ├── voyager/
- │   │   ├── CommandVoyagerTool.java
- │   │   ├── schema.json
+ │   ├── hello/
+ │   │   ├── HelloTool.java
+ │   │   ├── hello-schema.json
  │   │   ├── DESCRIPTION.md
  │   ├── another/
  │   │   ├── AnotherTool.java
- │   │   ├── schema.json
+ │   │   ├── another-schema.json
  │   │   ├── DESCRIPTION.md
  ├── config/
  ├── service/
@@ -98,7 +98,7 @@ Or run via your IDE (IntelliJ, Eclipse, etc.)
 Example request:
 
 {
-"message": "Turn on Voyager instruments"
+"message": "Say hello for my friend Jhon"
 }
 
 ---

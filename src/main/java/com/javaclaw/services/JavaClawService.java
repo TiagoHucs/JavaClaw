@@ -29,7 +29,7 @@ public class JavaClawService {
     @Autowired
     private ToolExecutor toolExecutor;
 
-    public String processarChat(String userInput) throws Exception {
+    public String chatProcess(String userInput) throws Exception {
 
         List<RequestMessage> contexto = new ArrayList<>();
         contexto.add(new RequestMessage("system", Utils.readFile("IDENTITY.md")));
@@ -49,7 +49,7 @@ public class JavaClawService {
                         tc.getFunction().getName(),
                         tc.getFunction().getArguments()
                 );
-                log.info("tool {} response: {} "+ tc.getFunction().getName() + result );
+                log.info(String.format("tool %s response: %s ", tc.getFunction().getName(), result ));
                 contexto.add(new RequestMessage("tool",result));
 
                 response = modelClient.call(contexto,toolDefinitions);

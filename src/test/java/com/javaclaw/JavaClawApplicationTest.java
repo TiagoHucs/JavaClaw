@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LumaAssistantApplicationTest {
+public class JavaClawApplicationTest {
     public static void main(String[] args) {
-        SpringApplication app = new SpringApplication(LumaAssistantApplicationTest.class);
+        SpringApplication app = new SpringApplication(JavaClawApplicationTest.class);
         app.setAdditionalProfiles("test");
         app.run(args);
     }

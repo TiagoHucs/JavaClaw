@@ -1,11 +1,14 @@
 {
   "type": "object",
   "properties": {
-    "command": {
+    "name": {
+      "type": "string"
+    },
+    "message": {
       "type": "string"
     }
   },
   "required": [
-    "command"
+    "name","message"
   ]
 }

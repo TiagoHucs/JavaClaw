@@ -14,7 +14,7 @@ public class ChatController {
 
     @PostMapping
     public String chat(@RequestBody String message) throws Exception {
-        return javaClawService.processarChat(message);
+        return javaClawService.chatProcess(message);
 
     }
 

@@ -14,24 +14,24 @@
 
 ## 🧠 How it works
 
-Luma follows a structured interaction flow with an AI API:
+JavaClaw follows a structured interaction flow with an AI API:
 
 1. The user sends a message
 2. The AI interprets the request
 3. If needed, the AI requests a tool execution
-4. Luma executes the tool locally
+4. JavaClaw executes the tool locally
 5. The result is sent back to the AI
 6. The AI returns a final response to the user
 
 👉 In short:
 - The AI decides **what to do**
-- Luma executes **how to do it**
+- JavaClaw executes **how to do it**
 
 ---
 
 ## 🛠️ Current Features
 
-- 📁 Example tool (`HelloTool`)
+- 📁 Example tool (`SendMessageTool`)
 - 🔄 Integration with AI APIs (e.g., OpenRouter/OpenAI)
 - 💬 Chat interface (in progress)
 - 🧠 Dynamic tool execution
@@ -43,9 +43,9 @@ Luma follows a structured interaction flow with an AI API:
 ```
 java-claw/
  ├── tools/
- │   ├── hello/
- │   │   ├── HelloTool.java
- │   │   ├── hello-schema.json
+ │   ├── sendmessage/
+ │   │   ├── SendMessageTool.java
+ │   │   ├── send-message-schema.json
  │   │   ├── DESCRIPTION.md
  │   ├── another/
  │   │   ├── AnotherTool.java
@@ -98,7 +98,7 @@ Or run via your IDE (IntelliJ, Eclipse, etc.)
 Example request:
 
 {
-"message": "Say hello for my friend Jhon"
+"message": "Say somthing cool for my friend Jhon"
 }
 
 ---
